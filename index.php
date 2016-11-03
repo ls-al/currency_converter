@@ -5,8 +5,8 @@
 
 <?php
 
-$result = file_get_contents('https://api.fixer.io/latest');
-$result = json_decode($result);
+$response = file_get_contents('https://api.fixer.io/latest');
+$response = json_decode($response);
 
 ?>
 
@@ -22,7 +22,7 @@ $result = json_decode($result);
 		<select name="from">
 			<option value="EUR">EUR</option>
 			<?php
-				foreach($result->rates as $key => $value) {
+				foreach($response->rates as $key => $value) {
 					echo "<option value='{$key}'>{$key}</option>";
 				}
 			?>
@@ -31,7 +31,7 @@ $result = json_decode($result);
 		<select name="to">
 			<option value="EUR">EUR</option>
 			<?php
-				foreach($result->rates as $key=> $value) {
+				foreach($response->rates as $key=> $value) {
 					echo "<option value='{$key}'>{$key}</option>";	
 				}
 			?>
@@ -58,18 +58,18 @@ if ($_POST['from'] && $_POST['to']) {
 	if ($from == $to) { die('From & To cannot be the same!'); }
 	if ($amount == 0 || $amount === null) { die('Amount has to be something!'); }
 
-	$result = file_get_contents("https://api.fixer.io/latest?base={$from}");
-	$result = json_decode($result);
+	$response = file_get_contents("https://api.fixer.io/latest?base={$from}");
+	$response = json_decode($response);
 
-	$calc = ($amount * $result->rates->{$to});
+	$calc = ($amount * $response->rates->{$to});
 
-	echo "Current exchange rate: {$result->rates->{$to}}<br>";
+	echo "Current exchange rate: {$response->rates->{$to}}<br>";
 
 	echo "{$amount} {$from} is {$calc} {$to}<br>";
 
 	/* Debugging */
 	/*echo "<pre>";
-	var_dump($result);
+	var_dump($response);
 	var_dump($_POST);*/
 }
 
