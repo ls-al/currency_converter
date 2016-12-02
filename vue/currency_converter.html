@@ -1,0 +1,52 @@
+<!--
+	Currency Convert v1
+	By Aimilios
+
+	Dev Date 2016/12/01
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Vue 2 JS Currency Converter</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container" id="my-div-1">
+
+	From:
+	<select name="from" v-model="from">
+		<option value="EUR">EUR</option>
+		<option v-for="(value, key) in currencies" v-bind:value="key">{{ key }}</option>
+	</select>
+
+	To:
+	<select name="to" v-model="to">
+		<option value="EUR">EUR</option>
+		<option v-for="(value, key) in currencies" v-bind:value="key">{{ key }}</option>
+	</select>
+
+	Amount:
+	<input type="text" name="amount" v-model="amount">
+
+	<button onclick="event.preventDefault();" @click="calcexchangerate">Convert</button>
+
+	<h3>From: {{ from }}</h3>
+	<h3>To: {{ to }}</h3>
+	<h3>Amount: {{ amount }}</h3>
+	<h3>Exchange rate: {{ exchange_rate }}</h3>
+	<h3>Converted Sum: {{ converted_sum }}</h3>
+
+</div>
+
+</body>
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript" src="currency_converter.js"></script>
+
+</html>
